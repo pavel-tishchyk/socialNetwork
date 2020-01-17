@@ -5,6 +5,7 @@ import {Paper, Grid, Typography, Button} from '@material-ui/core';
 import { renderTextField} from './../common/renderTextField';
 import { renderCheckbox} from './../common/renderCheckbox';
 import { required, email, aol } from './../../utils/validators';
+import { FormattedMessage } from 'react-intl';
 
 
 const useStyles = makeStyles(theme => ({
@@ -58,7 +59,9 @@ const LoginForm = (props) =>{
                 name="email"
                 className={classes.input} 
                 id="outlined-email" 
-                label="Login"  
+                label={
+                    <FormattedMessage id="login"/>
+                }  
                 variant="outlined" 
                 validate={[required, email, aol]}/>
             <Field 
@@ -66,7 +69,9 @@ const LoginForm = (props) =>{
                 name="password"
                 className={classes.input} 
                 id="outlined-password" 
-                label="Password"
+                label={
+                    <FormattedMessage id="password"/>
+                }
                 type="password" 
                 variant="outlined"
                 validate={required}/>
@@ -74,7 +79,9 @@ const LoginForm = (props) =>{
                 <Field 
                     component={renderCheckbox} 
                     name="rememberMe" 
-                    label="Remember Me"/>
+                    label={
+                        <FormattedMessage id="rememberMe"/>
+                    }/>
             </Grid>
             {captchaUrl && <Grid container justify="center" className={classes.captcha}>
                 <Grid container justify="center">
@@ -85,15 +92,19 @@ const LoginForm = (props) =>{
                     name="captcha"
                     className={classes.captchaInput} 
                     id="outlined-captcha" 
-                    label="Captcha"
+                    label={
+                        <FormattedMessage id="captcha"/>
+                    }
                     type="text" 
                     variant="outlined"
                     autoComplete="off"
                     validate={required}/>
             </Grid>}
             <Grid container justify='center'>
-                <Button variant="contained" color="primary" onClick={() => {handleSubmit()}} >Login</Button>
-                </Grid>
+                <Button variant="contained" color="primary" onClick={() => {handleSubmit()}} >
+                    <FormattedMessage id="login"/>
+                </Button>
+            </Grid>
         </Paper>
     );
 }

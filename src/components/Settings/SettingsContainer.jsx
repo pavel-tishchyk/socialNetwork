@@ -8,7 +8,8 @@ import {
     changeThemeColor,
     changeNavigation,
     } from './../../redux/settings-reducer';
-import { navigationDataSelector, settingsDataSelector } from '../../redux/settings-selectors';
+import { changeLocale } from './../../redux/app-reducer';
+import { navigationDataSelector, settingsDataSelector, localeDataSelector } from '../../redux/settings-selectors';
 
 class SettingsContainer extends React.Component {
 
@@ -16,12 +17,14 @@ class SettingsContainer extends React.Component {
         
     }
 
-    render() {       
+    render() {  
         return <Settings
             navigationData={this.props.navigationData}
             changeCurrentTheme={this.props.changeCurrentTheme}
             changeThemeColor={this.props.changeThemeColor}
-            changeNavigation={this.props.changeNavigation}/>
+            changeNavigation={this.props.changeNavigation}
+            localeData={this.props.localeData}
+            changeLocale={this.props.changeLocale}/>
     }
 }
 
@@ -29,6 +32,7 @@ let mapStateToProps = (state) => {
     return {
         navigationData: navigationDataSelector(state),
         settingsData: settingsDataSelector(state),
+        localeData: localeDataSelector(state),
     }
 
 };
@@ -38,9 +42,11 @@ let mapDispatchToProps = (dispatch) => {
         changeCurrentTheme: (name) => dispatch(changeCurrentTheme(name)),
         changeThemeColor: (color) => dispatch(changeThemeColor(color)),
         changeNavigation: (navigation) => dispatch(changeNavigation(navigation)),
+        changeLocale: (locale) => dispatch(changeLocale(locale)),
     }
 };
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps), 
-    withAuthRedirect)(SettingsContainer);
+    withAuthRedirect
+    )(SettingsContainer);

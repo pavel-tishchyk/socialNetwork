@@ -31,11 +31,16 @@ let initialState = {
     currentTheme: 'default',
 
     navigationData: [
-        {id: 0, path: '/profile', icon: <PersonIcon/>, name: 'Profile', isAdd: true},
-        {id: 1, path: '/messages', icon: <EmailIcon/>, name: 'Messages', isAdd: true},
-        {id: 2, path: '/news', icon: <MenuBookIcon/>, name: 'News', isAdd: true},
-        {id: 3, path: '/settings', icon: <SettingsIcon/>, name: 'Settings', isAdd: true},
+        {id: 0, path: '/profile', icon: <PersonIcon/>, name: 'profile', isAdd: true},
+        {id: 1, path: '/messages', icon: <EmailIcon/>, name: 'messages', isAdd: true},
+        {id: 2, path: '/news', icon: <MenuBookIcon/>, name: 'news', isAdd: true},
+        {id: 3, path: '/settings', icon: <SettingsIcon/>, name: 'settings', isAdd: true},
     ],
+
+    localeData: [
+        {id: 0, locale: 'en', name: 'english'},
+        {id: 1, locale: 'ru', name: 'russian'},
+    ]
 };
 
 const settingsReducer = (settingsData = initialState, action) => {

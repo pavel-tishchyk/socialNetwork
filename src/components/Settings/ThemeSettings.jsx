@@ -2,6 +2,7 @@ import React from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 import {colors, Grid, Paper, FormControlLabel, Switch} from "@material-ui/core"
+import { FormattedMessage } from 'react-intl';
 
 const styles = theme => ({
     wrapper: {
@@ -87,7 +88,9 @@ class ThemeSettings extends React.Component {
                             color="primary"
                         />
                     }   
-                    label="Show Tints"
+                    label={
+                        <FormattedMessage id="tints"/>
+                    }
                 />
                 <Paper className={classes.wrapper}>{palette}</Paper>
             </Grid>

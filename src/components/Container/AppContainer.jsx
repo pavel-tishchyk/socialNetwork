@@ -2,6 +2,8 @@ import React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Route } from 'react-router-dom';
+import { IntlProvider } from 'react-intl';
+import messages from './../../utils/messages';
 import LoginContainer from './../Login/LoginContainer';
 import HeaderContainer from './../Header/HeaderContainer';
 import ProfileContainer from './../Profile/ProfileContainer';
@@ -11,7 +13,7 @@ import DialogsContainer from './../Dialogs/DialogsContainer';
 import SearchContainer from './../Search/SearchContainer';
 import NewsContainer from './../News/NewsContainer';
 import PreLoader from './../common/PreLoader';
-import { initializedSelector, } from './../../redux/app-selectors';
+import { initializedSelector, localeSelector } from './../../redux/app-selectors';
 import { isAuthSelector, } from './../../redux/auth-selectors';
 import { themeSelector, } from './../../redux/settings-selectors';
 import { initializeApp } from './../../redux/app-reducer';
@@ -44,27 +46,32 @@ class AppContainer extends React.Component {
     }
     
     render () {
-        const { props: { classes, initialized, theme, isAuth } } = this;
+        const { props: { classes, initialized, theme, isAuth, locale } } = this;
         return initialized 
             ? <ThemeProvider theme={createMuiTheme(theme)}>
-                    <Container maxWidth={false} className={classes.container}>
-                        <Grid container spacing={0}>
-                            <Grid item xs={12}  className={classes.header}>
-                                <HeaderContainer />
+                    <IntlProvider
+                        locale={locale} 
+                        defaultLocale='ru'
+                        messages={messages[locale]}>
+                        <Container maxWidth={false} className={classes.container}>
+                            <Grid container spacing={0}>
+                                <Grid item xs={12}  className={classes.header}>
+                                    <HeaderContainer />
+                                </Grid>
+                                <Grid item xs={isAuth ? 2 : true} className={classes.nav}>
+                                    <NavBarContainer />
+                                </Grid>
+                                <Grid item xs={isAuth ? 10 : 12} className={classes.content}>
+                                    <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
+                                    <Route path='/messages/:dialogId?' render={() => <DialogsContainer />} />
+                                    <Route path='/news' render={() => <NewsContainer />} />
+                                    <Route path='/settings' render={() => <SettingsContainer />} />
+                                    <Route path='/search' render = {() => <SearchContainer />} />
+                                    <Route path='/login' render = {() => <LoginContainer />} />
+                                </Grid>
                             </Grid>
-                            <Grid item xs={isAuth ? 2 : true} className={classes.nav}>
-                                <NavBarContainer />
-                            </Grid>
-                            <Grid item xs={isAuth ? 10 : 12} className={classes.content}>
-                                <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
-                                <Route path='/messages/:dialogId?' render={() => <DialogsContainer />} />
-                                <Route path='/news' render={() => <NewsContainer />} />
-                                <Route path='/settings' render={() => <SettingsContainer />} />
-                                <Route path='/search' render = {() => <SearchContainer />} />
-                                <Route path='/login' render = {() => <LoginContainer />} />
-                            </Grid>
-                        </Grid>
-                    </Container>
+                        </Container>
+                    </IntlProvider>
                 </ThemeProvider> 
             : <PreLoader/>   
     }
@@ -74,7 +81,8 @@ let mapStateToProps = (state) => {
     return {
         initialized: initializedSelector(state),
         isAuth: isAuthSelector(state),
-        theme: themeSelector(state)
+        theme: themeSelector(state),
+        locale: localeSelector(state)
     }
 
 };

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 import { Grid, FormControlLabel, Checkbox, Button } from "@material-ui/core"
+import { FormattedMessage } from 'react-intl';
 
 const styles = theme => ({
     
@@ -37,14 +38,21 @@ class NavigationSettings extends React.Component {
                             color="primary"
                         />
                         }
-                        label={item.name}
+                        label={
+                            <FormattedMessage id={item.name} />
+                        }
                     />
         })
 
         return (
             <Grid item xs={12}>
                 {test}
-                <Button variant="contained" color="primary" onClick={() => changeNavigation(customNavigation)} >Save</Button>
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    onClick={() => changeNavigation(customNavigation)} >
+                    <FormattedMessage id="save"/>
+                </Button>
             </Grid>
         )
     }

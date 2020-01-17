@@ -2,6 +2,7 @@ import React from 'react';
 import {NavLink} from 'react-router-dom';
 import {makeStyles} from '@material-ui/core/styles';
 import {MenuItem, ListItemIcon, ListItemText} from '@material-ui/core';
+import { FormattedMessage } from 'react-intl';
 
 const useStyles = makeStyles(theme => ({
     link: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const NavBarItem =({path, icon, name}) =>{
+const NavBarItem = ({path, icon, name}) =>{
     const classes = useStyles();
 
     return(
@@ -38,7 +39,12 @@ const NavBarItem =({path, icon, name}) =>{
                 <ListItemIcon className={classes.icon}>
                     {icon}
                 </ListItemIcon>
-                <ListItemText className={classes.text} primary={name}/>
+                <ListItemText 
+                    className={classes.text} 
+                    primary={
+                    <FormattedMessage id={name}/>
+                    }
+                />
             </MenuItem>
         </NavLink>
     )
