@@ -32,6 +32,4 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default compose(
-	connect(mapStateToProps, mapDispatchToProps)
-	withAuthRedirect)(HeaderContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
