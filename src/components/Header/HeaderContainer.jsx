@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { withAuthRedirect } from './../../hoc/withAuthRedirect';
 import Header from './Header';
 import { logOutThunkCreator } from '../../redux/auth-reducer';
 import { isAuthSelector, loginSelector } from '../../redux/auth-selectors';
@@ -30,4 +32,6 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
+export default compose(
+	connect(mapStateToProps, mapDispatchToProps)
+	withAuthRedirect)(HeaderContainer);
