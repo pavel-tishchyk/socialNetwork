@@ -40,6 +40,9 @@ const useStyles = makeStyles(theme => ({
         width: '45%',
         margin: theme.spacing(3, 0),
     },
+    column: {
+        flexDirection: 'column',
+    },
     bold: {
         fontWeight: 'bold',
     }
@@ -54,7 +57,7 @@ const LoginForm = (props) =>{
             className={classes.form} 
             noValidate autoComplete="on"
             onSubmit={handleSubmit}>
-            <Grid flexDirection='column' alignItems='center' container justify="center">
+            <Grid className={classes.column} alignItems='center' container justify="center">
                 <Typography> Test Account</Typography>
                 <Typography className={classes.bold}> Login:  free@samuraijs.com</Typography>
                 <Typography className={classes.bold}> Password: free</Typography>
