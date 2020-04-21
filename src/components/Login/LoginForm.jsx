@@ -54,7 +54,7 @@ const LoginForm = (props) =>{
             className={classes.form} 
             noValidate autoComplete="on"
             onSubmit={handleSubmit}>
-            <Grid container justify="center">
+            <Grid flexDirection='column' alignItems='center' container justify="center">
                 <Typography> Test Account</Typography>
                 <Typography className={classes.bold}> Login:  free@samuraijs.com</Typography>
                 <Typography className={classes.bold}> Password: free</Typography>
