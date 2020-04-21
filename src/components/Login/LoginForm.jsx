@@ -39,6 +39,9 @@ const useStyles = makeStyles(theme => ({
     captchaInput: {
         width: '45%',
         margin: theme.spacing(3, 0),
+    },
+    bold: {
+        fontWeight: 'bold',
     }
 }));
 
@@ -51,6 +54,11 @@ const LoginForm = (props) =>{
             className={classes.form} 
             noValidate autoComplete="on"
             onSubmit={handleSubmit}>
+            <Grid container justify="center">
+                <Typography> Test Account</Typography>
+                <Typography className={classes.bold}> Login:  free@samuraijs.com</Typography>
+                <Typography className={classes.bold}> Password: free</Typography>
+            </Grid>
             <Grid container justify="center" className={props.error && classes.test}>
                 <Typography color="error">{props.error}</Typography>
             </Grid>
